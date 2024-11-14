@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Card</title>
+    <style>
+        body {
+            background-color: #f0f8ff;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            text-align: center;
+            position: relative; /* Para que los adornos se posicionen correctamente */
+        }
+
+        .card {
+            width: 80%;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: #b22222;
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7);
+            margin-bottom: 20px;
+            animation: fadeIn 2s ease-out;
+        }
+
+        .card-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            animation: fadeInContent 2s ease-out;
+        }
+
+        .card-text {
+            flex: 1;
+            font-size: 1.2em;
+            color: #2e8b57;
+            margin: 20px;
+            animation: fadeInText 3s ease-out;
+        }
+
+        .card-image {
+            flex: 0 0 250px;
+            margin-left: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            animation: rotateImage 10s infinite linear;
+        }
+
+        .card-image img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .snowflakes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Para que los adornos no interfieran con la interacción */
+        }
+
+        .snowflake, .decorative-item {
+            position: absolute;
+            font-size: 2em; /* Tamaño de los adornos */
+            animation: snow 10s infinite ease-in-out; /* Suavizamos la animación */
+            pointer-events: none;
+        }
+
+        @keyframes snow {
+            0% {
+                top: -10%;
+                left: calc(100% * var(--left)); /* Movimiento horizontal aleatorio */
+                opacity: 1; /* Inicia visible */
+            }
+            100% {
+                top: 100%;
+                left: calc(100% * var(--left)); /* Movimiento horizontal constante */
+                opacity: 0; /* Se desvanece al llegar al final */
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInContent {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInText {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes rotateImage {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Christmas Card -->
+    <div class="card">
+        <h1>Merry Christmas!</h1>
+        <div class="card-content">
+            <div class="card-text">
+                <p>Wishing you a joyful holiday season filled with love, peace, and happiness! May your days be merry and bright!</p>
+            </div>
+            <div class="card-image">
+                <img src="mision.png" alt="Christmas Tree">
+            </div>
+        </div>
+    </div>
+
+    <!-- Snowflakes and Other Decorations -->
+    <div class="snowflakes"></div>
+
+    <script>
+        // Lista de posibles adornos navideños
+        const decorations = ['❄️', '🎄', '✨', '🔔', '🎁'];
+
+        const numDecorations = 50; // Aumentamos el número de adornos
+        const decorationsContainer = document.querySelector('.snowflakes');
+
+        for (let i = 0; i < numDecorations; i++) {
+            const decoration = document.createElement('div');
+            decoration.classList.add('decorative-item');
+            
+            // Elegir un adorno aleatorio de la lista
+            const randomDecoration = decorations[Math.floor(Math.random() * decorations.length)];
+            decoration.innerHTML = randomDecoration;
+
+            // Asignar una posición aleatoria para la izquierda (entre 0 y 1)
+            const randomLeft = Math.random();
+            decoration.style.setProperty('--left', randomLeft);
+
+            // Añadir un retraso aleatorio a la animación
+            decoration.style.animationDelay = Math.random() * 5 + 's';
+
+            // Asignar una duración aleatoria para los adornos
+            decoration.style.animationDuration = (Math.random() * 5 + 5) + 's'; // Entre 5s y 10s
+
+            decorationsContainer.appendChild(decoration);
+        }
+    </script>
+
+</body>
+</html>
+
+
